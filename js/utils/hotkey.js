@@ -1,14 +1,17 @@
 import { activateDarkTheme, activateLightTheme } from "./theme.js";
 import { toast } from "../components/toast.js";
+import { Settings } from "../components/settings.js";
 
+const settings = new Settings();
 const SPECIAL_KEYS = Object.freeze(["Meta"]);
 const keymap = {};
 
 export const COMMAND_COMMENTS = Object.freeze({
-  HELP: "CMD + H help",
-  INDENTATION: "CMD + I Indentation",
-  DARK_THEME: "CMD + D Dark Theme",
-  LIGHT_THEME: "CMD + L Light Theme",
+  HELP: "[CMD + H] help",
+  INDENTATION: "[CMD + I] Indentation",
+  DARK_THEME: "[CMD + D] Dark Theme",
+  LIGHT_THEME: "[CMD + L] Light Theme",
+  SETTINGS: "[CMD + ,] Settings",
 });
 
 const HELP_FEATURE_ELEMENTS = Object.values(COMMAND_COMMENTS).map((text) => {
@@ -37,6 +40,7 @@ export const registerHotKeys = () => {
     }
 
     if (keymap["Meta"]) {
+      console.log(e.key);
       switch (e.key) {
         case "h":
           e.preventDefault();
@@ -49,6 +53,10 @@ export const registerHotKeys = () => {
         case "l":
           e.preventDefault();
           activateLightTheme();
+          break;
+        case ",":
+          e.preventDefault();
+          settings.toggle();
           break;
       }
     }

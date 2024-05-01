@@ -6,12 +6,15 @@ export const toast = (htmlText, timeout) => {
 
   toastContainer.id = toastContainerId;
   toastContainer.style.position = "fixed";
-  toastContainer.style.bottom = "1rem";
-  toastContainer.style.width = "100vw";
+  toastContainer.style.bottom = "0.5rem";
+  toastContainer.style.left = "50%";
+  toastContainer.style.transform = "translate(-50%, -50%)";
   toastContainer.style.transition = `all ${timeout * 0.7}ms ease`;
+  toastContainer.style.width = "100vw";
   toastContainer.style.opacity = 1;
   toastContainer.style.display = "flex";
   toastContainer.style.justifyContent = "center";
+  toastContainer.style.backgroundColor = "rgba(0, 0, 0, 0%)";
 
   toastStyle.innerHTML = `
     #${toastContainerId} > div {

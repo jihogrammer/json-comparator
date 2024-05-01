@@ -1,4 +1,5 @@
-import { decodeBase64, encodeBase64 } from "../base64.js";
+import { decodeBase64, encodeBase64 } from "../utils/base64.js";
+import { COMMAND_COMMENTS } from "../utils/hotkey.js";
 import * as QueryParameters from "../utils/params.js";
 import { toast } from "./toast.js";
 
@@ -39,7 +40,7 @@ export class Textarea {
       }
 
       if (this.#keymap["Meta"] && "i" === event.key) {
-        toast("CMD + I - indentation", 1000);
+        toast(COMMAND_COMMENTS.INDENTATION, 1000);
 
         const object = JSON.parse(event.target.value);
         const defaultJSONString = JSON.stringify(object);

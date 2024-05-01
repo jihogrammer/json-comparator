@@ -5,14 +5,14 @@ import { Textarea } from "./components/textarea.js";
 window.onload = () => {
   initTheme();
 
-  const asisElement = document.getElementById("asis-container");
-  const tobeElement = document.getElementById("tobe-container");
+  const asisContainer = document.getElementById("asis-container");
+  const tobeContainer = document.getElementById("tobe-container");
 
   const asisTextarea = new Textarea("asis");
   const tobeTextarea = new Textarea("tobe");
 
-  asisElement.appendChild(asisTextarea.element);
-  tobeElement.appendChild(tobeTextarea.element);
+  asisContainer.appendChild(asisTextarea.element);
+  tobeContainer.appendChild(tobeTextarea.element);
 
   registerHotKeys();
 };
