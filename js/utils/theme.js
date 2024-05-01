@@ -1,3 +1,6 @@
+import { toast } from "../components/toast.js";
+import { COMMAND_COMMENTS } from "./hotkey.js";
+
 const THEME = "theme";
 const LIGHT_THEME = "light";
 const DARK_THEME = "dark";
@@ -12,6 +15,7 @@ const getUserTheme = () => {
   if (DARK_THEME === userTheme) {
     return DARK_THEME;
   }
+
   return null;
 };
 
@@ -21,19 +25,21 @@ const getOSTheme = () => {
 
 const checkbox = () => document.getElementById(THEME_CHECKBOX_ELEMENT_ID);
 
-const activateLightTheme = () => {
+export const activateLightTheme = () => {
   localStorage.setItem(THEME, LIGHT_THEME);
   document.documentElement.setAttribute(THEME, LIGHT_THEME);
   checkbox().checked = false;
+  toast(COMMAND_COMMENTS.LIGHT_THEME, 1000);
 };
 
-const activateDarkTheme = () => {
+export const activateDarkTheme = () => {
   localStorage.setItem(THEME, DARK_THEME);
   document.documentElement.setAttribute(THEME, DARK_THEME);
   checkbox().checked = true;
+  toast(COMMAND_COMMENTS.DARK_THEME, 1000);
 };
 
-export const initThemeChager = () => {
+export const initTheme = () => {
   const theme = getUserTheme() || getOSTheme();
 
   if (LIGHT_THEME === theme) {
