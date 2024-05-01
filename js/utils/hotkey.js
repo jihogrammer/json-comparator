@@ -1,6 +1,8 @@
-import { activateDarkTheme, activateLightTheme } from "./theme.js";
 import { toast } from "../components/toast.js";
 import { Settings } from "../components/settings.js";
+import { activateDarkTheme, activateLightTheme } from "./theme.js";
+import * as QueryParameters from "./params.js";
+import { renderEdit, renderView } from "../components/container.js";
 
 const settings = new Settings();
 const SPECIAL_KEYS = Object.freeze(["Meta"]);
@@ -57,6 +59,13 @@ export const registerHotKeys = () => {
         case ",":
           e.preventDefault();
           settings.toggle();
+          break;
+        case "Enter":
+          if ("view" === QueryParameters.get("mode")) {
+            renderEdit();
+          } else {
+            renderView();
+          }
           break;
       }
     }

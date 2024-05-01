@@ -26,6 +26,10 @@ export class Settings {
         font-size: ${this.fontSize};
         line-height: calc(${this.fontSize} * ${GOLDEN_RATIO});
       }
+      #container table pre {
+        font-size: ${this.fontSize};
+        line-height: calc(${this.fontSize} * ${GOLDEN_RATIO});
+      }
     `;
   }
 
