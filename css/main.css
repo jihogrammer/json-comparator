@@ -81,16 +81,29 @@ nav #toolkit {
   top: 0;
   right: 0;
   margin: 1rem;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 1rem;
 }
 
-nav #toolkit #home-icon {
-  fill: gray;
+nav #toolkit * {
+  display: block;
 }
 
-nav #toolkit #home-icon:hover {
-  fill: var(--text-color);
-  transition: left 100ms ease;
+nav #toolkit #home,
+nav #toolkit #donation {
+  align-self: center;
+  font-size: calc(0.5rem * var(--golden-ratio));
+  line-height: calc(0.5rem * var(--golden-ratio));
+}
+
+nav #toolkit #home:hover,
+nav #toolkit #donation:hover {
   cursor: pointer;
+  font-weight: bold;
+  color: var(--accent-2-color);
 }
 
 #theme-label {
