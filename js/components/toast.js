@@ -5,27 +5,29 @@ export const toast = (htmlText, timeout) => {
   const toastContent = document.createElement("div");
 
   toastContainer.id = toastContainerId;
-  toastContainer.style.position = "fixed";
-  toastContainer.style.bottom = "0.5rem";
-  toastContainer.style.left = "50%";
-  toastContainer.style.transform = "translate(-50%, -50%)";
-  toastContainer.style.transition = `all ${timeout * 0.7}ms ease`;
-  toastContainer.style.width = "100vw";
-  toastContainer.style.opacity = 1;
-  toastContainer.style.display = "flex";
-  toastContainer.style.justifyContent = "center";
-  toastContainer.style.backgroundColor = "rgba(0, 0, 0, 0%)";
 
   toastStyle.innerHTML = `
+    #${toastContainerId} {
+      position: fixed;
+      bottom: 0.5rem;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      transition: all ${timeout * 0.7}ms ease;
+      width: 100vw;
+      opacity: 1;
+      display: flex;
+      justify-content: center;
+      background-color: rgba(0, 0, 0, 0%);
+    }
     #${toastContainerId} > div {
       border-radius: 0.5rem;
       padding: 1rem 0.5rem;
-      background-color: var(--accent-3-color);
-      color: white;
+      background-color: var(--accent-2-color);
+      color: var(--white-color);
     }
     #${toastContainerId} > div * {
       background-color: inherit;
-      color: white;
+      color: var(--white-color);
     }
   `;
 

@@ -1,10 +1,11 @@
-class ModalContainer {
+export class ModalContainer {
   #element;
   #layerElement;
   #contentsElement;
 
-  constructor() {
+  constructor(id) {
     this.#element = document.createElement("div");
+    this.#element.id = id;
     this.#layerElement = document.createElement("div");
     this.#contentsElement = document.createElement("div");
 
@@ -56,5 +57,3 @@ class ModalContainer {
     document.body.style.overflow = "scroll";
   };
 }
-
-export const modalContainer = new ModalContainer();
