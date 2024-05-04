@@ -1,17 +1,33 @@
 :root {
-  --accent-1-color: rgb(200, 100, 200);
-  --accent-2-color: rgb(180, 90, 180);
-  --accent-3-color: rgb(160, 80, 160);
+  --golden-ratio: 1.61803398875;
+  --accent-base-color: 70;
+
+  --white-color: rgb(249, 249, 249);
+  --black-color: rgb(7, 7, 7);
+
+  --accent-r-1-color: calc(var(--accent-base-color) * 2);
+  --accent-r-2-color: calc(var(--accent-base-color) * var(--golden-ratio) * 2);
+  --accent-r-3-color: calc(var(--accent-base-color) * var(--golden-ratio) * var(--golden-ratio) * 2);
+  --accent-g-1-color: calc(var(--accent-base-color));
+  --accent-g-2-color: calc(var(--accent-base-color) * var(--golden-ratio));
+  --accent-g-3-color: calc(var(--accent-base-color) * var(--golden-ratio) * var(--golden-ratio));
+  --accent-b-1-color: calc(var(--accent-base-color) * 2);
+  --accent-b-2-color: calc(var(--accent-base-color) * var(--golden-ratio) * 2);
+  --accent-b-3-color: calc(var(--accent-base-color) * var(--golden-ratio) * var(--golden-ratio) * 2);
+
+  --accent-1-color: rgb(var(--accent-r-1-color), var(--accent-g-1-color), var(--accent-b-1-color));
+  --accent-2-color: rgb(var(--accent-r-2-color), var(--accent-g-2-color), var(--accent-b-2-color));
+  --accent-3-color: rgb(var(--accent-r-3-color), var(--accent-g-3-color), var(--accent-b-3-color));
 }
 
 :root[theme=light] {
-  --background-color: #FAFAFA;
-  --text-color: #040404;
+  --background-color: var(--white-color);
+  --text-color: var(--black-color);
 }
 
 :root[theme=dark] {
-  --background-color: #040404;
-  --text-color: #FAFAFA;
+  --background-color: var(--black-color);
+  --text-color: var(--white-color);
 }
 
 * {
@@ -49,39 +65,15 @@ h3 {
   font-size: 1.5rem;
 }
 
-main {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-}
-
-#container {
+nav {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  gap: 1rem;
 }
 
 #main-title {
   margin-top: 1rem;
   margin-bottom: 2rem;
-}
-
-#container > section {
-  width: 40vw;
-}
-
-#container > section textarea {
-  width: 100%;
-  height: 80vh;
-  padding: 0.5rem;
-  resize: none;
-}
-
-#container > section textarea:focus-visible {
-  outline-offset: max(2px, 0.1rem);
-  outline: max(2px, 0.1rem) solid var(--accent-1-color);
 }
 
 #theme-label {
@@ -119,7 +111,7 @@ main {
 }
 
 #theme-checkbox:checked::before {
-  background-color: white;
+  background-color: var(--white-color);
   left: 1rem;
 }
 
@@ -137,11 +129,41 @@ main {
   box-shadow: 0 0 0 max(4px, 0.2rem) var(--accent-2-color);
 }
 
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+#container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 1rem;
+}
+
+#container > section {
+  width: 40vw;
+}
+
+#container > section textarea {
+  width: 100%;
+  height: 80vh;
+  padding: 0.5rem;
+  resize: none;
+}
+
+#container > section textarea:focus-visible {
+  outline-offset: max(2px, 0.1rem);
+  outline: max(2px, 0.1rem) solid var(--accent-2-color);
+}
+
 ::selection {
   background-color: var(--accent-1-color);
 }
 
 .accent {
-  color: white;
+  color: var(--white-color);
   background-color: var(--accent-1-color);
 }
