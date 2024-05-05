@@ -1,58 +1,44 @@
+"use strict";
+
 import { toast } from "../components/toast.js";
 import { COMMAND_COMMENTS } from "./hotkey.js";
 
 const THEME = "theme";
-const LIGHT_THEME = "light";
 const DARK_THEME = "dark";
-const THEME_CHECKBOX_ELEMENT_ID = "theme-checkbox";
-
-const getUserTheme = () => {
-  const userTheme = localStorage.getItem(THEME);
-
-  if (LIGHT_THEME === userTheme) {
-    return LIGHT_THEME;
-  }
-  if (DARK_THEME === userTheme) {
-    return DARK_THEME;
-  }
-
-  return null;
-};
-
-const getOSTheme = () => {
-  return window.matchMedia("(prefers-color-scheme: light)").matches ? LIGHT_THEME : DARK_THEME;
-};
-
-const checkbox = () => document.getElementById(THEME_CHECKBOX_ELEMENT_ID);
+const LIGHT_THEME = "light";
 
 export const activateLightTheme = () => {
   localStorage.setItem(THEME, LIGHT_THEME);
   document.documentElement.setAttribute(THEME, LIGHT_THEME);
-  checkbox().checked = false;
   toast(COMMAND_COMMENTS.LIGHT_THEME, 1000);
 };
 
 export const activateDarkTheme = () => {
   localStorage.setItem(THEME, DARK_THEME);
   document.documentElement.setAttribute(THEME, DARK_THEME);
-  checkbox().checked = true;
   toast(COMMAND_COMMENTS.DARK_THEME, 1000);
 };
 
 export const initTheme = () => {
-  const theme = getUserTheme() || getOSTheme();
+  const getOSTheme = () => {
+    return window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? DARK_THEME
+      : LIGHT_THEME;
+  };
 
-  if (LIGHT_THEME === theme) {
-    activateLightTheme();
-  } else {
+  const theme = localStorage.getItem(THEME) || getOSTheme();
+
+  if (DARK_THEME === theme) {
     activateDarkTheme();
+  } else {
+    activateLightTheme();
   }
 
-  checkbox().addEventListener("click", (event) => {
-    if (event.target.checked) {
-      activateDarkTheme();
-    } else {
+  document.getElementById(THEME).addEventListener("click", () => {
+    if (DARK_THEME === document.documentElement.getAttribute(THEME)) {
       activateLightTheme();
+    } else {
+      activateDarkTheme();
     }
   });
 };

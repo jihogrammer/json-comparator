@@ -14,6 +14,7 @@ export const COMMAND_COMMENTS = Object.freeze({
   DARK_THEME: "[CMD + D] Dark Theme",
   LIGHT_THEME: "[CMD + L] Light Theme",
   SETTINGS: "[CMD + ,] Settings",
+  COMPARE_OR_EDIT: "[CMD + Enter] Compare or Edit",
 });
 
 const HELP_FEATURE_ELEMENTS = Object.values(COMMAND_COMMENTS).map((text) => {

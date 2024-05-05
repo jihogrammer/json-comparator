@@ -1,10 +1,12 @@
 :root {
   --golden-ratio: 1.61803398875;
+
+  --color-base: 7;
+  --black-base: calc(var(--color-base) * var(--golden-ratio));
+  --white-color: rgb(calc(256 - var(--black-base)), calc(256 - var(--black-base)), calc(256 - var(--black-base)));
+  --black-color: rgb(var(--black-base), var(--black-base), var(--black-base));
+
   --accent-base-color: 70;
-
-  --white-color: rgb(249, 249, 249);
-  --black-color: rgb(7, 7, 7);
-
   --accent-r-1-color: calc(var(--accent-base-color) * 2);
   --accent-r-2-color: calc(var(--accent-base-color) * var(--golden-ratio) * 2);
   --accent-r-3-color: calc(var(--accent-base-color) * var(--golden-ratio) * var(--golden-ratio) * 2);
@@ -85,73 +87,52 @@ nav #toolkit {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  gap: 1rem;
+  gap: 0.7rem;
 }
 
 nav #toolkit * {
   display: block;
 }
 
-nav #toolkit #home,
-nav #toolkit #donation {
+nav #toolkit a {
   align-self: center;
   font-size: calc(0.5rem * var(--golden-ratio));
   line-height: calc(0.5rem * var(--golden-ratio));
 }
 
-nav #toolkit #home:hover,
-nav #toolkit #donation:hover {
+nav #toolkit a:hover {
   cursor: pointer;
   font-weight: bold;
   color: var(--accent-2-color);
 }
 
-#theme-label {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  cursor: pointer;
+nav #toolkit a[rel=me]:hover,
+nav #toolkit a[rel=help]:hover {
+  cursor: help;
 }
 
-#theme-checkbox {
-  appearance: none;
-  position: relative;
-
-  border: max(2px, 0.1rem) solid var(--accent-2-color);
-  border-radius: 1.25rem;
-  width: 2.25rem;
-  height: 1.25rem;
+nav #toolkit a:hover .tooltip {
+  visibility: visible;
 }
 
-#theme-checkbox::before {
-  content: "";
+nav #toolkit a .tooltip {
+  visibility: hidden;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  text-align: center;
+  border: 1px solid var(--accent-3-color);
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  font-size: 0.7rem;
+
   position: absolute;
-  left: 0;
-  width: 1rem;
-  height: 1rem;
-  border-radius: 50%;
-  transform: scale(0.8);
-  background-color: var(--accent-2-color);
-  transition: left 250ms linear;
+  z-index: 1;
+  transition: all 1ms ease;
 }
 
-#theme-checkbox:checked::before {
-  background-color: var(--white-color);
-  left: 1rem;
-}
-
-#theme-checkbox:checked {
-  background-color: var(--accent-1-color);
-  border-color: var(--accent-1-color);
-}
-
-#theme-checkbox:focus-visible {
-  outline-offset: max(2px, 0.1rem);
-  outline: max(2px, 0.1rem) solid var(--accent-1-color);
-}
-
-#theme-checkbox:enabled:hover {
-  box-shadow: 0 0 0 max(4px, 0.2rem) var(--accent-2-color);
+nav #toolkit a:nth-last-child(1) .tooltip,
+nav #toolkit a:nth-last-child(2) .tooltip {
+  right: 0;
 }
 
 main {

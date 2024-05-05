@@ -12,10 +12,6 @@ const DONATION_IMAGES = ["./img/donation-qr-toss.png", "./img/donation-qr-kakao.
 });
 
 export const initToolkit = () => {
-  document.getElementById("home").addEventListener("click", () => {
-    window.open("https://github.com/jihogrammer/json-comparator", "_blank");
-  });
-
   document.getElementById("donation").addEventListener("click", () => {
     const container = document.createElement("div");
     container.style.display = "flex";

@@ -2,9 +2,11 @@
 
 import { decodeBase64 } from "../utils/base64.js";
 import { comparator } from "../utils/compare.js";
+import { COMMAND_COMMENTS } from "../utils/hotkey.js";
 import * as QueryParameters from "../utils/params.js";
 import { comparison } from "./comparison.js";
 import { Textarea } from "./textarea.js";
+import { toast } from "./toast.js";
 
 const container = document.getElementById("container");
 
@@ -21,6 +23,8 @@ export const renderView = () => {
   console.log(result);
 
   container.appendChild(comparisonElement);
+
+  toast(COMMAND_COMMENTS.COMPARE_OR_EDIT, 1000);
 };
 
 export const renderEdit = () => {
@@ -39,4 +43,6 @@ export const renderEdit = () => {
   tobeContainer.appendChild(tobeTextarea.element);
   container.appendChild(asisContainer);
   container.appendChild(tobeContainer);
+
+  toast(COMMAND_COMMENTS.COMPARE_OR_EDIT, 1000);
 };
