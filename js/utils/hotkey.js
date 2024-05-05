@@ -1,12 +1,16 @@
+"use strinct";
+
 import { toast } from "../components/toast.js";
 import { Settings } from "../components/settings.js";
+import { renderEdit, renderView } from "../components/container.js";
 import { activateDarkTheme, activateLightTheme } from "./theme.js";
 import * as QueryParameters from "./params.js";
-import { renderEdit, renderView } from "../components/container.js";
 
 const settings = new Settings();
-const SPECIAL_KEYS = Object.freeze(["Meta"]);
+const SPECIAL_KEYS = Object.freeze(["Meta", "Control"]);
 const keymap = {};
+
+export const isKeyDownFuction = () => keymap["Meta"] || keymap["Control"];
 
 export const COMMAND_COMMENTS = Object.freeze({
   HELP: "[CMD + H] help",
@@ -17,23 +21,19 @@ export const COMMAND_COMMENTS = Object.freeze({
   COMPARE_OR_EDIT: "[CMD + Enter] Compare or Edit",
 });
 
-const HELP_FEATURE_ELEMENTS = Object.values(COMMAND_COMMENTS).map((text) => {
-  const element = document.createElement("p");
-
-  element.style.padding = "0.5rem";
-  element.innerText = text;
-
-  return element;
-});
-
 const toastHelp = () => {
-  const helpContainer = document.createElement("div");
+  const container = document.createElement("div");
 
-  for (const featureElement of HELP_FEATURE_ELEMENTS) {
-    helpContainer.appendChild(featureElement);
+  for (const key in COMMAND_COMMENTS) {
+    const featureElement = document.createElement("p");
+
+    featureElement.style.padding = "0.5rem";
+    featureElement.innerText = COMMAND_COMMENTS[key];
+
+    container.appendChild(featureElement);
   }
 
-  toast(helpContainer.innerHTML, 1500);
+  toast(container.innerHTML, 1500);
 };
 
 export const registerHotKeys = () => {
@@ -42,7 +42,7 @@ export const registerHotKeys = () => {
       keymap[e.key] = true;
     }
 
-    if (keymap["Meta"]) {
+    if (isKeyDownFuction()) {
       console.log(e.key);
       switch (e.key) {
         case "h":
