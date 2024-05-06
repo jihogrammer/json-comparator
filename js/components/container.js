@@ -10,21 +10,56 @@ import { toast } from "./toast.js";
 
 const container = document.getElementById("container");
 
+const handleJSONParsingError = (message, e) => {
+  console.error(e);
+  const messageDiv = document.createElement("div");
+  const edit = document.createElement("a");
+  edit.innerText = `"CMD + Enter"`;
+  edit.style.color = "blue";
+  edit.style.cursor = "pointer";
+
+  messageDiv.innerHTML = `
+    <p>${message}</p>
+    <p>Please press ${edit.outerHTML}, and edit JSON.</p>
+    <br>
+    <p style="color: red;">cause: ${e.message}</p>
+  `;
+
+  messageDiv.querySelector("a").addEventListener("click", renderEdit);
+  container.appendChild(messageDiv);
+};
+
 export const renderView = () => {
   QueryParameters.put("mode", "view");
   container.innerHTML = "";
 
-  const asisString = decodeBase64(QueryParameters.get("asis"));
-  const tobeString = decodeBase64(QueryParameters.get("tobe"));
+  let asisObject, tobeObject;
 
-  const result = comparator.compare(JSON.parse(asisString), JSON.parse(tobeString));
-  const comparisonElement = comparison.render(result);
+  try {
+    asisObject = JSON.parse(decodeBase64(QueryParameters.get("asis")));
+  } catch(e) {
+    handleJSONParsingError("Failed to parse asis JSON string.", e);
+    return;
+  }
 
-  console.log(result);
+  try {
+    tobeObject = JSON.parse(decodeBase64(QueryParameters.get("tobe")));
+  } catch(e) {
+    handleJSONParsingError("Failed to parse tobe JSON string.", e);
+    return;
+  }
 
-  container.appendChild(comparisonElement);
+  try {
+    const result = comparator.compare(asisObject, tobeObject);
+    const comparisonElement = comparison.render(result);
 
-  toast(COMMAND_COMMENTS.COMPARE_OR_EDIT, 1000);
+    container.appendChild(comparisonElement);
+
+    toast(COMMAND_COMMENTS.COMPARE_OR_EDIT, 1000);
+  } catch(e) {
+    handleJSONParsingError("Failed to compare JSONs.", e);
+    return;
+  }
 };
 
 export const renderEdit = () => {
