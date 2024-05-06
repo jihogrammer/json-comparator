@@ -30,15 +30,18 @@ export class Textarea {
 
     this.element.addEventListener("keydown", (event) => {
       if (isKeyDownFuction() && "i" === event.key) {
-        toast(COMMAND_COMMENTS.INDENTATION, 1000);
+        try {
+          const object = JSON.parse(event.target.value);
+          const defaultJSONString = JSON.stringify(object);
+          toast(COMMAND_COMMENTS.INDENTATION, 1000);
 
-        const object = JSON.parse(event.target.value);
-        const defaultJSONString = JSON.stringify(object);
-
-        if (defaultJSONString === event.target.value) {
-          event.target.value = JSON.stringify(object, null, 2);
-        } else {
-          event.target.value = defaultJSONString;
+          if (defaultJSONString === event.target.value) {
+            event.target.value = JSON.stringify(object, null, 2);
+          } else {
+            event.target.value = defaultJSONString;
+          }
+        } catch(e) {
+          toast(e.message, 3000);
         }
       }
     });
