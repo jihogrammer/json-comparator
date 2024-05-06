@@ -76,6 +76,7 @@ nav {
 nav #main-title {
   margin-top: 1rem;
   margin-bottom: 2rem;
+  cursor: pointer;
 }
 
 nav #toolkit {
@@ -163,6 +164,10 @@ main {
 #container > section textarea:focus-visible {
   outline-offset: max(2px, 0.1rem);
   outline: max(2px, 0.1rem) solid var(--accent-2-color);
+}
+
+#container > div > div > table th {
+  user-select: none;
 }
 
 ::selection {

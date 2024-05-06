@@ -1,4 +1,8 @@
+"use strict";
+
+import { renderEdit, renderView } from "../components/container.js";
 import { ModalContainer } from "../components/modal.js";
+import * as QueryParameters from "./params.js";
 
 const modal = new ModalContainer("donation");
 
@@ -12,6 +16,14 @@ const DONATION_IMAGES = ["./img/donation-qr-toss.png", "./img/donation-qr-kakao.
 });
 
 export const initToolkit = () => {
+  document.getElementById("main-title").addEventListener("click", () => {
+    if ("edit" === QueryParameters.get("mode")) {
+      renderView();
+    } else {
+      renderEdit();
+    }
+  });
+
   document.getElementById("donation").addEventListener("click", () => {
     const container = document.createElement("div");
     container.style.display = "flex";

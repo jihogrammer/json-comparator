@@ -1,7 +1,6 @@
 const updateURL = (urlSearchParams) => {
   if (history.pushState) {
     const url = `${window.location.protocol}//${window.location.host}${window.location.pathname === "/" ? "" : window.location.pathname}?${urlSearchParams}`;
-    console.log(url);
     window.history.pushState({path: url}, '', url);
   }
 };

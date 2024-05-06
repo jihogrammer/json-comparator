@@ -43,7 +43,6 @@ export const registerHotKeys = () => {
     }
 
     if (isKeyDownFuction()) {
-      console.log(e.key);
       switch (e.key) {
         case "h":
           e.preventDefault();
