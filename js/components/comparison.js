@@ -2,6 +2,10 @@
 
 import { ValueType, DiffType } from "../utils/compare.js";
 
+const BACKGROUND_COLOR_RED = "rgba(255, 0, 0, 33%)";
+const BACKGROUND_COLOR_GREEN = "rgba(0, 255, 0, 33%)";
+const BACKGROUND_COLOR_YELLOW = "rgba(255, 255, 0, 33%)";
+
 class Comparison {
   #element;
   #asisTable;
@@ -77,14 +81,14 @@ class Comparison {
 
   #createRowElement = (key, value, depth, prevRecord, nextRecord, list) => {
     if (key && prevRecord && key === prevRecord.key) {
-      return;
+      if ("object" === typeof(value) && value.constructor === Array) {
+        value = [prevRecord.value, value[1]];
+      } else {
+        value = [prevRecord.value, value];
+      }
     }
     if (key && nextRecord && key === nextRecord.key) {
-      if ("object" === typeof(value) && value.constructor === Array) {
-        value = [value[0], nextRecord.value];
-      } else {
-        value = [value, nextRecord.value];
-      }
+      return;
     }
 
     const asisTR = document.createElement("tr");
@@ -147,20 +151,20 @@ class Comparison {
         }
 
         if (tobeContents.innerText === "") {
-          asisNumber.style.backgroundColor = "rgba(255, 0, 0, 33%)";
-          asisTD.style.backgroundColor = "rgba(255, 0, 0, 33%)";
-          asisContents.style.backgroundColor = "rgba(255, 0, 0, 33%)";
+          asisNumber.style.backgroundColor = BACKGROUND_COLOR_RED;
+          asisTD.style.backgroundColor = BACKGROUND_COLOR_RED;
+          asisContents.style.backgroundColor = BACKGROUND_COLOR_RED;
         } else if (asisContents.innerText === "") {
-          tobeNumber.style.backgroundColor = "rgba(0, 255, 0, 33%)";
-          tobeTD.style.backgroundColor = "rgba(0, 255, 0, 33%)";
-          tobeContents.style.backgroundColor = "rgba(0, 255, 0, 33%)";
+          tobeNumber.style.backgroundColor = BACKGROUND_COLOR_GREEN;
+          tobeTD.style.backgroundColor = BACKGROUND_COLOR_GREEN;
+          tobeContents.style.backgroundColor = BACKGROUND_COLOR_GREEN;
         } else if (asisContents.innerText !== tobeContents.innerText) {
-          asisNumber.style.backgroundColor = "rgba(255, 255, 0, 33%)";
-          asisTD.style.backgroundColor = "rgba(255, 255, 0, 33%)";
-          asisContents.style.backgroundColor = "rgba(255, 255, 0, 33%)";
-          tobeNumber.style.backgroundColor = "rgba(255, 255, 0, 33%)";
-          tobeTD.style.backgroundColor = "rgba(255, 255, 0, 33%)";
-          tobeContents.style.backgroundColor = "rgba(255, 255, 0, 33%)";
+          asisNumber.style.backgroundColor = BACKGROUND_COLOR_YELLOW;
+          asisTD.style.backgroundColor = BACKGROUND_COLOR_YELLOW;
+          asisContents.style.backgroundColor = BACKGROUND_COLOR_YELLOW;
+          tobeNumber.style.backgroundColor = BACKGROUND_COLOR_YELLOW;
+          tobeTD.style.backgroundColor = BACKGROUND_COLOR_YELLOW;
+          tobeContents.style.backgroundColor = BACKGROUND_COLOR_YELLOW;
         }
       }
     } else {

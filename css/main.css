@@ -166,8 +166,9 @@ main {
   outline: max(2px, 0.1rem) solid var(--accent-2-color);
 }
 
-#container > div > div > table th {
+#container > div > div > table th pre {
   user-select: none;
+  padding: 0 0.5rem;
 }
 
 ::selection {
