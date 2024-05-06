@@ -131,15 +131,15 @@ class Comparison {
       }
     }
 
-    if ("object" === typeof(value)) {
+    if (value && "object" === typeof(value)) {
       if (value.constructor === Array) {
-        if (value[0]) {
+        if (value[0] !== null) {
           asisNumber.innerText = ++this.#asisLineNumber;
           asisContents.innerHTML = this.#formatContents(key, value[0], depth, asisHasNext);
         } else {
           asisNumber.innerText = " "
         }
-        if (value[1]) {
+        if (value[1] !== null) {
           tobeNumber.innerText = ++this.#tobeLineNumber;
           tobeContents.innerHTML = this.#formatContents(key, value[1], depth, tobeHasNext);
         } else {
